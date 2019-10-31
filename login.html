@@ -8,32 +8,88 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/UmbrellaLogo.png">
+    <!-- ^web icon -->
     </head>
     <body>
         <div class="container-fluid" id="outer">
-            <div id="inner">
-                <header>
-                    <h1>Sign In</h1>
-                </header>
-                <div class="jumbotron">
-                    <form method="post" action="#"> 
-                        <div class="form-group">
-                            <label for="uname">Username</label>
-                            <input type="text" placeholder="Enter Username" name="uname" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="psw">Password</label>
-                            <input type="password" placeholder="Enter Password" name="psw" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                            <a href="www.google.com" target="_blank">
-                                <button class="btn btn-secondary">Sign Up</button>
-                            </a>
-                        </div>
-                    </form>
-                </div>
+          <div class="row">
+            <div class="col-sm">
+              <div id="inner2">
+                  <header>
+                      <!-- <h1>Umbrella</h1> -->
+                      <img src="img/UmbrellaLogo1.png" alt="Logo" height="70" width="200">
+                  </header>
+                  <div class="jumbotron">
+                      <p>
+                        Umbrella encompasses reliability and user friendly in a platform that seemingly combine
+                        a database, a front end, and nodejs.
+                        We captured the need players and coaches have and gave them the power to record matches
+                        and organize their teams.
+                        Each league will be able to see a bracket that will show when and where each teams meet.
+
+                      </p>
+                  </div>
+              </div>
             </div>
-        </div>
+<!-- second column -->
+           <div class="col-sm">
+              <div id="inner">
+                  <header>
+                      <h1>Sign In</h1>
+                  </header>
+                  <div class="jumbotron">
+                      <form method="post" action="#">
+                          <div class="form-group">
+                              <label for="uname">Username</label>
+                              <input type="text" placeholder="Enter Username" name="uname" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="psw">Password</label>
+                              <input type="password" placeholder="Enter Password" name="psw" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-primary">Login</button>
+                              <br>
+                                <br>
+                              <!-- <a href="www.google.com" target="_blank"></a> -->
+                          </div>
+                          <div class="row">
+                            <div class="col-sm">
+                              <p>
+                                New here?
+                              </p>
+                            </div>
+                             <div class="col-sm">
+                                <button class="btn btn-secondary btn-light">Sign Up</button>
+                            </div>
+                          </div>
+
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+<h2>Testimonials</h2>
+  <div class="container2">
+    <img src="img/imageholder.png" alt="Avatar" style="width:90px">
+    <p><span>Chris Fox.</span> CEO at Mighty Schools.</p>
+    <p>John Doe saved us from a web disaster.</p>
+  </div>
+
+  <div class="container2">
+    <img src="img/imageholder.png" alt="Avatar" style="width:90px">
+    <p><span >Rebecca Flex.</span> CEO at Company.</p>
+    <p>No one is better than John Doe.</p>
+  </div>
+</div>
+
+
+
+
+
+
+
     </body>
 </html>

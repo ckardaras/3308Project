@@ -1,3 +1,11 @@
+color Palette:
+#3D6480
+#C7E8FF
+#7AC8FF
+#637480
+#61A0CC
+
+
 * {
   margin: 0;
   padding: 0;
@@ -13,15 +21,89 @@ html, body {
   height: 100%;
   background: #fff;
 }
-  
+
+.container{
+
+  display: grid;
+  grid-template-columns: auto auto;
+  /*background: #C7E8FF;
+  color:#C7E8FF;*/
+
+   /*padding: 10px;*/
+}
+.jumbotron{
+  background: #C7E8FF;
+  /*color:#C7E8FF;*/
+}
+
   #inner {
-    color: #663399;
-    padding: 2%, 3% ;
-    width: 100%;
-    min-width: 300px;
-    max-width: 300px;    
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;top: 50%;
+    color: #61A0CC;
+    /*padding: 2%, 3% ;*/
+    padding: 50px;
+    /*width: 200%;*/
+    min-width: 400px;
+    max-width: 400px;
+
+    /*left: 50%;*/
+    /*top: 50%;*/
+  }
+
+#inner2{
+
+  padding: 50px;
+  min-width: 500px;
+  max-width: 500px;
+
+  /*top: 50%;*/
+
+}
+
+@media (max-width: 500px) {
+  /*#inner {
+    min-width: 200px;
+    max-width: 200px;
+
+  }*/
+  #inner2 {
+    min-width: 400px;
+    max-width: 400px;
+
+
+
+  }
+}
+.container2 {
+  border: 2px solid #ccc;
+  background-color: #C7E8FF;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0
+}
+
+.container2::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container2 img {
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container2 span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+@media (max-width: 500px) {
+  .container2 {
+      text-align: center;
+  }
+  .container2 img {
+      margin: auto;
+      float: none;
+      display: block;
   }
 }
