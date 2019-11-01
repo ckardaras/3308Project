@@ -1,0 +1,24 @@
+/*https://www.w3schools.com/howto/howto_css_testimonials.asp*/
+color Palette:
+#3D6480
+#C7E8FF
+#7AC8FF
+#637480
+#61A0CC
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+img-fluid{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
