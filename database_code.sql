@@ -44,11 +44,11 @@ CREATE TABLE IF NOT EXISTS `League`.`User` (
   `password` VARCHAR(50) NOT NULL,
   `Team_Id` INT NOT NULL,
   `UserGroup_Id` INT NULL,
-  INDEX `TeamId_idx` (`Team_Id` ASC) VISIBLE,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `password_UNIQUE` (`password` ASC) VISIBLE,
+  INDEX `TeamId_idx` (`Team_Id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `password_UNIQUE` (`password` ASC),
   PRIMARY KEY (`User_Id`),
-  INDEX `User_Group_Id_idx` (`UserGroup_Id` ASC) VISIBLE,
+  INDEX `User_Group_Id_idx` (`UserGroup_Id` ASC),
   CONSTRAINT `TeamId`
     FOREIGN KEY (`Team_Id`)
     REFERENCES `League`.`Team` (`Team_Id`)
@@ -86,8 +86,7 @@ CREATE TABLE IF NOT EXISTS `League`.`Match` (
   `Match_Id` INT NOT NULL AUTO_INCREMENT,
   `GameDate` DATE NULL,
   `Arena` VARCHAR(100) NULL,
-  `AcceptResults` TINYINT NULL,
-  `Matchcol` VARCHAR(45) NULL,
+  `Valid` VARCHAR(45) NOT NULL DEFAULT 'False',
   PRIMARY KEY (`Match_Id`))
 ENGINE = InnoDB;
 
@@ -101,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `League`.`TeamMatch_Bridge` (
   `Score` INT NULL,
   `is_Winner` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`Match_Id`, `Team_Id`),
-  INDEX `Team_Id_idx` (`Team_Id` ASC) VISIBLE,
+  INDEX `Team_Id_idx` (`Team_Id` ASC),
   CONSTRAINT `Match_Id`
     FOREIGN KEY (`Match_Id`)
     REFERENCES `League`.`Match` (`Match_Id`)
@@ -120,11 +119,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `League`.`Setup` (
   `Limiter` ENUM('only') NOT NULL DEFAULT 'only',
-  `LeagueName` VARCHAR(45) NULL,
   `NumOfTeams` INT NOT NULL,
   `TeamSize` INT NOT NULL,
+  `LeagueName` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`Limiter`),
-  UNIQUE INDEX `Limiter_UNIQUE` (`Limiter` ASC) VISIBLE)
+  UNIQUE INDEX `Limiter_UNIQUE` (`Limiter` ASC))
 ENGINE = InnoDB;
 
 
@@ -145,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `League`.`GroupRules_Bridge` (
   `UserGroup_Id` INT NOT NULL,
   `Rule_Id` INT NOT NULL,
   PRIMARY KEY (`UserGroup_Id`, `Rule_Id`),
-  INDEX `Rule_Id_idx` (`Rule_Id` ASC) VISIBLE,
+  INDEX `Rule_Id_idx` (`Rule_Id` ASC),
   CONSTRAINT `UserGroup_Id`
     FOREIGN KEY (`UserGroup_Id`)
     REFERENCES `League`.`UserGroup` (`UserGroup_Id`)
