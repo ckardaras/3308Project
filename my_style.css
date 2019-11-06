@@ -1,0 +1,13 @@
+/* Add any css you want to use for you website here */
+.btn-group .button {
+  background-color: blue;
+  border: 1px solid black;
+  color: white;
+  padding: 15px 280px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+	margin: 4px 10px;
+  cursor: pointer;
+}

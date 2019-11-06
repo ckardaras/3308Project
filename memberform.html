@@ -8,54 +8,70 @@
 	<link rel='icon' href='../resources/img/favicon.ico' type='image/x-icon'/>
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-	<link href="css/style2.css" rel="stylesheet">
+	<link href="my_style.css" rel="stylesheet">
   </head>
-  <body>
+  <body onload="viewForm('coach_form', 0); viewForm('player_form', 0)">
 
 	<img src="img/UmbrellaLogo1.png" class="img-fluid " alt="Registration">
     <br>
 	<br>
-	<div class="container">
+  <div class= "btn-group">
+    <button class="button buttonC" value="C" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)">Coach</button>
+    <button class="button buttonP" value="P" onclick="viewForm('player_form', 1); viewForm('coach_form', 0)">Player</button>
+  </div>
+  <!--<div class="form-check">
+    <input class="form-check-input" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)" type="radio" name="member_type" id="coach" value="C">
+    <label class="form-check-label" for="coach">
+    Coach
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" onclick="viewForm('player_form', 1); viewForm('coach_form', 0)" type="radio" name="member_type" id="player" value="P">
+    <label class="form-check-label" for="player">
+    Member
+    </label>
+  </div>-->
+	<div class="container" id = "player_form">
 		<form action="home.html">
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label" for="fullName">Full Name</label>
+				<label class="col-sm-2 col-form-label" for="player_fullName">Full Name</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="fullName" id="fullName"  placeholder="Enter Name">
+					<input type="text" class="form-control" name="player_fullName" id="player_fullName"  placeholder="Enter Name">
 				</div>
 			</div>
       <div class="form-group row">
-				<label class="col-sm-2 col-form-label" for="userName">Username</label>
+				<label class="col-sm-2 col-form-label" for="player_userName">Username</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="userName" id="userName"  placeholder="Enter Username">
+					<input type="text" class="form-control" name="player_userName" id="player_userName"  placeholder="Enter Username">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label"  for="emailAddress">Email address</label>
+				<label class="col-sm-2 col-form-label"  for="player_emailAddress">Email address</label>
 				<div class="col-sm-10">
-					<input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter email">
+					<input type="email" class="form-control" name="player_emailAddress" id="player_emailAddress" placeholder="Enter email">
 				</div>
 			</div>
       <div class="form-group row">
-				<label class="col-sm-2 col-form-label"  for="phoneNumber">Phone number</label>
+				<label class="col-sm-2 col-form-label"  for="player_phoneNumber">Phone number</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number">
+					<input type="text" class="form-control" name="player_phoneNumber" id="player_phoneNumber" placeholder="Enter phone number">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label  class="col-sm-2 col-form-label" for="passwordFirst">Password</label>
+				<label  class="col-sm-2 col-form-label" for="player_passwordFirst">Password</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="passwordFirst" name="passwordFirst" placeholder="Password">
+					<input type="password" class="form-control" id="player_passwordFirst" name="player_passwordFirst" placeholder="Password">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label  class="col-sm-2 col-form-label" for="passwordConfirm">Confirm Password</label>
+				<label  class="col-sm-2 col-form-label" for="player_passwordConfirm">Confirm Password</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
+					<input type="password" class="form-control" id="player_passwordConfirm" name="player_passwordConfirm" placeholder="Confirm Password">
 				</div>
 			</div>
 			 <fieldset class="form-group">
-				<div class="row" id="student_status">
-					<select name="undergrad_level" id="undergrad_select" class="custom-select custom-select-sm">
+				<div class="row" id="team">
+					<select name="team_name" id="team_joined" class="custom-select custom-select-sm">
 					  <option selected>Select Team</option>
 					  <option value="1">Team1</option>
 					  <option value="2">Team2</option>
@@ -68,9 +84,56 @@
 		</form>
 		<br>
 	</div>
+  <div class="container" id = "coach_form">
+    <form action="home.html">
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label" for="coach_fullName">Full Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="coach_fullName" id="coach_fullName"  placeholder="Enter Name">
+				</div>
+			</div>
+      <div class="form-group row">
+				<label class="col-sm-2 col-form-label" for="coach_userName">Username</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="coach_userName" id="coach_userName"  placeholder="Enter Username">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label"  for="coach_emailAddress">Email address</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" name="coach_emailAddress" id="coach_emailAddress" placeholder="Enter email">
+				</div>
+			</div>
+      <div class="form-group row">
+				<label class="col-sm-2 col-form-label"  for="coach_phoneNumber">Phone number</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="coach_phoneNumber" id="coach_phoneNumber" placeholder="Enter phone number">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label" for="coach_passwordFirst">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="coach_passwordFirst" name="coach_passwordFirst" placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label" for="coach_passwordConfirm">Confirm Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="coach_passwordConfirm" name="coach_passwordConfirm" placeholder="Confirm Password">
+				</div>
+			</div>
+      <div class="form-group row">
+				<label  class="col-sm-2 col-form-label" for="coach_createTeam">Create a Team</label>
+				<div class="col-sm-10">
+					<input type="new_team_name" class="form-control" id="coach_createTeam" name="coach_createTeam" placeholder="Enter Team Name">
+				</div>
+			</div>
+			<input type="submit" value="submit" class="btn btn-primary btn-block">
+		</form>
+  </div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-	<script src="../resources/js/my_scripts.js"></script>
+	<script src="forms.js"></script>
 </body>
 </html>
