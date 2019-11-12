@@ -11,3 +11,35 @@ function viewForm(id, toggle)
 		document.getElementById(id).style.height= 'auto';
 	}
 }
+
+var teams = [];
+
+function createTeam(team_id)
+{
+	teams.push(document.getElementById("coach_createTeam").value);
+}
+
+function loadTeams()
+{
+	if(teams.length == 0)
+	{
+		window.alert("There are no teams created.");
+		return;
+	}
+	var i;
+	var dropdown = document.getElementById("team_selector");
+	for(i = 0; i < teams.length; i++)
+	{
+		var x = document.createElement("A");
+		x.href="#";
+		x.setAttribute("onclick", "pickedTeam(" + i + ")");
+		x.setAttribute("class", "dropdown-item");
+		x.innerText = teams[i];
+		dropdown.appendChild(x);
+	}
+}
+
+function pickedTeam(i)
+{
+	document.getElementById("selectTeamButton").innerText = teams[i];
+}
