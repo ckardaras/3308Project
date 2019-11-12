@@ -15,22 +15,12 @@
 	<img src="img/UmbrellaLogo1.png" class="img-fluid " alt="Registration">
     <br>
 	<br>
+    <!-- Buttons to select if coach or player -->
   <div class= "btn-group">
     <button class="button buttonC" value="C" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)">Coach</button>
-    <button class="button buttonP" value="P" onclick="viewForm('player_form', 1); viewForm('coach_form', 0)">Player</button>
+    <button class="button buttonP" value="P" onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()">Player</button>
   </div>
-  <!--<div class="form-check">
-    <input class="form-check-input" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)" type="radio" name="member_type" id="coach" value="C">
-    <label class="form-check-label" for="coach">
-    Coach
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" onclick="viewForm('player_form', 1); viewForm('coach_form', 0)" type="radio" name="member_type" id="player" value="P">
-    <label class="form-check-label" for="player">
-    Member
-    </label>
-  </div>-->
+    <!-- Player Form -->
 	<div class="container" id = "player_form">
 		<form action="home.html">
 			<div class="form-group row">
@@ -69,21 +59,25 @@
 					<input type="password" class="form-control" id="player_passwordConfirm" name="player_passwordConfirm" placeholder="Confirm Password">
 				</div>
 			</div>
-			 <fieldset class="form-group">
+			<!-- <fieldset class="form-group">
 				<div class="row" id="team">
 					<select name="team_name" id="team_joined" class="custom-select custom-select-sm">
 					  <option selected>Select Team</option>
-					  <option value="1">Team1</option>
-					  <option value="2">Team2</option>
-					  <option value="3">Team3</option>
-					  <option value="4">Team4</option>
 					</select>
 				</div>
-			  </fieldset>
-			<input type="submit" value="submit" class="btn btn-primary btn-block">
+      </fieldset>-->
+        <div class="dropdown">
+          <button class="btn btn-block dropdown-toggle" type="button" id="selectTeamButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #7AC8FF; border-color: #3D6480">
+          Select a Team
+          </button>
+          <div id="team_selector" class="dropdown-menu" aria-labelledby="selectPlayerButton">
+          </div>
+        </div>
+			<input type="submit" value="Submit" class="btn btn-primary btn-block" style="background-color: #61A0CC; border-color: #3D6480">
 		</form>
 		<br>
 	</div>
+    <!-- Coach Form -->
   <div class="container" id = "coach_form">
     <form action="home.html">
 			<div class="form-group row">
@@ -128,7 +122,8 @@
 					<input type="new_team_name" class="form-control" id="coach_createTeam" name="coach_createTeam" placeholder="Enter Team Name">
 				</div>
 			</div>
-			<input type="submit" value="submit" class="btn btn-primary btn-block">
+      <input type="button" value="Temporary create team button - would be combined with Submit in final proj" class="btn btn-primary btn-block" onclick="createTeam('coach_createTeam')" style="background-color: #61A0CC; border-color: #3D6480">
+			<input type="submit" value="Submit" class="btn btn-primary btn-block" style="background-color: #61A0CC; border-color: #3D6480">
 		</form>
   </div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
