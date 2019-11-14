@@ -13,6 +13,7 @@ function viewForm(id, toggle)
 }
 
 var teams = [];
+var numTeams = 0;
 
 function createTeam(team_id)
 {
@@ -28,7 +29,7 @@ function loadTeams()
 	}
 	var i;
 	var dropdown = document.getElementById("team_selector");
-	for(i = 0; i < teams.length; i++)
+	for(i = numTeams; i < teams.length; i++)
 	{
 		var x = document.createElement("A");
 		x.href="#";
@@ -37,6 +38,7 @@ function loadTeams()
 		x.innerText = teams[i];
 		dropdown.appendChild(x);
 	}
+	numTeams++;
 }
 
 function pickedTeam(i)
