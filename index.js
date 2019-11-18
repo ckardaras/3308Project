@@ -8,13 +8,13 @@ const app = express();
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var con = mysql.createConnection({
     host:"localhost",
     user: "root",
-    password: "our_super_secret_password",
+    password: "",
     multipleStatements:true
 });
 
@@ -57,4 +57,3 @@ con.connect(function(err){      //con is the reference to our database
 
 
 app.listen(3000)
-
