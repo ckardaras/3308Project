@@ -1,22 +1,23 @@
-var mysql = require('mysql');
-var express = require('express');
-var bodyParser = require("body-parser");
-var pug = require('pug');
-
+const express = require('express');
+const fileUpload = require('express-fileupload');
+const bodyParser = require("body-parser");
+const mysql = require('mysql');
+const path = require('path');
+const pug = require('pug');
 const app = express();
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = 3000;
 
-var con = mysql.createConnection({
+
+const db = mysql.createConnection({
     host:"localhost",
     user: "root",
     password: "",
     multipleStatements:true
 });
+
+
 
 
 var sql ="DROP DATABASE IF EXISTS League; CREATE DATABASE League;" //Make New Database, drop existing League DB if exists
@@ -43,17 +44,54 @@ sql+="CREATE TABLE IF NOT EXISTS `League`.`Rules` (`Rule_Id` INT NOT NULL AUTO_I
 
 sql+="CREATE TABLE IF NOT EXISTS `League`.`GroupRules_Bridge` (`UserGroup_Id` INT NOT NULL,`Rule_Id` INT NOT NULL,PRIMARY KEY (`UserGroup_Id`, `Rule_Id`),INDEX `Rule_Id_idx` (`Rule_Id` ASC),CONSTRAINT `UserGroup_Id`FOREIGN KEY (`UserGroup_Id`)REFERENCES `League`.`UserGroup` (`UserGroup_Id`)ON DELETE NO ACTION ON UPDATE NO ACTION,CONSTRAINT `Rule_Id`FOREIGN KEY (`Rule_Id`)REFERENCES `League`.`Rules` (`Rule_Id`)ON DELETE NO ACTION ON UPDATE NO ACTION)ENGINE = InnoDB;" //make GroupRules_bridge table
 
+sql+="INSERT INTO User Values (1, 'admin','admin',0,1);"
+
 sql+="SET SQL_MODE=@OLD_SQL_MODE;SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;" //set various variables back to default
 
-con.connect(function(err){      //con is the reference to our database
+
+db.connect(function(err){      //con is the reference to our database
     if(err) throw err;
     console.log("Connected!");
-    con.query(sql, function(err,result){
+    db.query(sql, function(err,result){
         if (err) throw err;
         console.log("Database League Created");
     });
 });
 
+global.db=db;
 
 
-app.listen(3000)
+//configure middleware
+app.set('port',process.env.port || port); //set express to use this port
+app.set('views', __dirname + '/views'); //set express to look in this folder to render views
+app.set('view engine', 'pug'); //configure template engine
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); //parse form data client
+app.use(express.static(__dirname + '/'));
+app.use(fileUpload()); //configure file upload
+
+
+
+
+
+app.get('/',function(req,res){
+    db.query('Select * from User;', function(err, rows, fields) {
+    db.end();
+    if(!err)
+    {
+        console.log(rows);
+        res.render('pages/test.pug',{
+            data:rows
+        });
+    }
+    else
+        console.log('encountered error');
+    });
+    
+});
+
+
+
+app.listen(port, ()=> {
+    console.log('Server running on port:',port);
+});

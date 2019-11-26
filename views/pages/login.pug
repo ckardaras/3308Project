@@ -1,0 +1,46 @@
+include ../partials/header.pug
+#outer.container-fluid
+  .row
+    .col-sm
+      #inner2
+        header
+          // <h1>Umbrella</h1>
+          img(src='../img/UmbrellaLogo1.png' alt='Logo' height='70' width='200')
+        .jumbotron
+          p
+            | Umbrella encompasses reliability and user friendliness in a platform that seemingly combines
+            | a database, a front end, and nodejs.
+            | We captured the need players and coaches have and gave them the power to record matches
+            | and organize their teams.
+            | Each league will be able to see a bracket that will show when and where each teams meet.
+    // second column
+    .col-sm
+      #inner
+        header
+          h1 Sign In
+        .jumbotron
+          form(method='post' action='#')
+            .form-group
+              label(for='uname') Username
+              input.form-control(type='text' placeholder='Enter Username' name='uname')
+            .form-group
+              label(for='psw') Password
+              input.form-control(type='password' placeholder='Enter Password' name='psw')
+            .form-group
+              button.btn.btn-primary(type='submit') Login
+              br
+              br
+            .row
+              .col-sm
+                p
+                  | New here?
+              .col-sm
+                button.btn.btn-secondary.btn-light Sign Up
+  // Will add javascript to go through an array of testimonial
+  h2 Testimonials
+  .container2
+    img(src='../img/imageholder.png' alt='Avatar' style='width:90px')
+    p
+      span Chris Fox.
+      |  CEO at Mighty Schools.
+    p John Doe saved us from a web disaster.
