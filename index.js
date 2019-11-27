@@ -87,10 +87,69 @@ app.get('/',function(req,res){
     else
         console.log('encountered error');
     });
-    
+
 });
 
+// login page
+app.get('/login', function(req, res) {
+	res.render('pages/login',{
+		local_css:"style1.css", //don't think we need this since we did internal css in our pug
+		my_title:"Login Page"
+	});
+});
 
+app.post('/auth', function(req, res) {
+	var username = req.body.username;
+	var password = req.body.password;
+	if (username && password) {
+		connection.query('SELECT * FROM USER WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
+				req.session.username = username;
+				res.redirect('/PlayerPage');
+			} else {
+				res.send('Incorrect Username and/or Password!');
+			}
+			res.end();
+		});
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
+// registration page
+app.get('/register', function(req, res) {
+	res.render('pages/memberform',{
+    local_css:"my_style.css",
+		my_title:"Registration Page"
+	});
+});
+
+app.post('/sign_up', function(req,res){
+    var name = req.player_form.player_fullName;
+    var username = req.player_form.player_userName;
+    var email =req.player_form.player_emailAddress;
+    var pass = req.player_form.player_passwordFirst;
+    var pass2 = req.player_form.player_passwordConfirm;
+    var phone =req.player_form.player_phoneNumber;
+
+    var data = {
+        "name": name,
+        "username": username,
+        "email":email,
+        "password":pass,
+        "passwordconfirm":pass2,
+        "phone":phone
+    }
+connection.query('INSERT INTO User SET ?', data, function(error, results, fields){
+        if (err) throw err;
+        console.log("Record inserted Successfully");
+
+    });
+
+    return res.redirect('/PlayerPage');
+});
 
 app.listen(port, ()=> {
     console.log('Server running on port:',port);

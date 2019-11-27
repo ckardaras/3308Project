@@ -1,0 +1,96 @@
+doctype html
+head
+//I did not include the header because this doesn't have a body
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description' content='')
+  title Member Signin
+  link(rel='icon' href='../img/UmbrellaLogo.png')
+  // Bootstrap core CSS
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS' crossorigin='anonymous')
+  link(href='../css/my_style.css' rel='stylesheet')
+  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k' crossorigin='anonymous')
+  script(src='../forms.js')
+img.img-fluid(src='../img/UmbrellaLogo1.png' alt='Registration')
+br
+br
+// Buttons to select if coach or player
+.btn-group
+  button.button.buttonC(value='C' onclick="viewForm('coach_form', 1); viewForm('player_form', 0)") Coach
+  button.button.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
+// Player Form
+#player_form.container
+  form(action='PlayerPage.html')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_fullName') Full Name
+      .col-sm-10
+        input#player_fullName.form-control(type='text' name='player_fullName' placeholder='Enter Name')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_userName') Username
+      .col-sm-10
+        input#player_userName.form-control(type='text' name='player_userName' placeholder='Enter Username')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_emailAddress') Email address
+      .col-sm-10
+        input#player_emailAddress.form-control(type='email' name='player_emailAddress' placeholder='Enter email')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_phoneNumber') Phone number
+      .col-sm-10
+        input#player_phoneNumber.form-control(type='text' name='player_phoneNumber' placeholder='Enter phone number')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_passwordFirst') Password
+      .col-sm-10
+        input#player_passwordFirst.form-control(type='password' name='player_passwordFirst' placeholder='Password')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='player_passwordConfirm') Confirm Password
+      .col-sm-10
+        input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password')
+    //
+      <fieldset class="form-group">
+      <div class="row" id="team">
+      <select name="team_name" id="team_joined" class="custom-select custom-select-sm">
+      <option selected>Select Team</option>
+      </select>
+      </div>
+      </fieldset>
+    .dropdown
+      button#selectTeamButton.btn.btn-block.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='background-color: #7AC8FF; border-color: #3D6480')
+        | Select a Team
+      #team_selector.dropdown-menu(aria-labelledby='selectPlayerButton')
+    input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
+  br
+// Coach Form
+#coach_form.container
+  form(action='PlayerPage.html')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_fullName') Full Name
+      .col-sm-10
+        input#coach_fullName.form-control(type='text' name='coach_fullName' placeholder='Enter Name')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_userName') Username
+      .col-sm-10
+        input#coach_userName.form-control(type='text' name='coach_userName' placeholder='Enter Username')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_emailAddress') Email address
+      .col-sm-10
+        input#coach_emailAddress.form-control(type='email' name='coach_emailAddress' placeholder='Enter email')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_phoneNumber') Phone number
+      .col-sm-10
+        input#coach_phoneNumber.form-control(type='text' name='coach_phoneNumber' placeholder='Enter phone number')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_passwordFirst') Password
+      .col-sm-10
+        input#coach_passwordFirst.form-control(type='password' name='coach_passwordFirst' placeholder='Password')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_passwordConfirm') Confirm Password
+      .col-sm-10
+        input#coach_passwordConfirm.form-control(type='password' name='coach_passwordConfirm' placeholder='Confirm Password')
+    .form-group.row
+      label.col-sm-2.col-form-label(for='coach_createTeam') Create a Team
+      .col-sm-10
+        input#coach_createTeam.form-control(type='new_team_name' name='coach_createTeam' placeholder='Enter Team Name')
+    input.btn.btn-primary.btn-block(type='button' value='Temporary create team button - would be combined with Submit in final proj' onclick="createTeam('coach_createTeam')" style='background-color: #61A0CC; border-color: #3D6480')
+    input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
