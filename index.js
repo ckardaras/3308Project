@@ -93,7 +93,7 @@ app.get('/',function(req,res){
 // login page
 app.get('/login', function(req, res) {
 	res.render('pages/login',{
-		local_css:"style1.css", //don't think we need this since we did internal css in our pug
+		local_css:"../../css/style1", //don't think we need this since we did internal css in our pug
 		my_title:"Login Page"
 	});
 });
@@ -120,7 +120,7 @@ app.post('/auth', function(req, res) {
 
 // registration page
 app.get('/register', function(req, res) {
-	res.render('pages/memberform',{
+	res.render('pages/register',{
     local_css:"my_style.css",
 		my_title:"Registration Page"
 	});
