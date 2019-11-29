@@ -26,7 +26,7 @@ sql+="SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;SET @OLD_FOREIGN_K
 
 sql+="CREATE SCHEMA IF NOT EXISTS `League` DEFAULT CHARACTER SET utf8; USE League;" //make schema step into leage db
 
-sql += "CREATE TABLE IF NOT EXISTS `League`.`Team` (`Team_Id` INT NOT NULL AUTO_INCREMENT,`TeamName` VARCHAR(45) NULL,`Active` TINYINT NULL DEFAULT 1,PRIMARY KEY (`Team_Id`))ENGINE = InnoDB;" //make team table
+sql += "CREATE TABLE IF NOT EXISTS `League`.`Team` (`Team_Id` INT NOT NULL AUTO_INCREMENT,`TeamName` VARCHAR(45) NULL,`Active` TINYINT NULL DEFAULT 1,`TeamDesc` VARCHAR(200) NULL,PRIMARY KEY (`Team_Id`))ENGINE = InnoDB;" //make team table
 
 sql+="CREATE TABLE IF NOT EXISTS `League`.`UserGroup` (`UserGroup_Id` INT NOT NULL AUTO_INCREMENT,`UserGroupName` VARCHAR(50) NULL,PRIMARY KEY (`UserGroup_Id`))ENGINE = InnoDB;" //make usergroup table
 
@@ -56,7 +56,7 @@ sql+="insert into User Values(3, 'Peach','pass',1, 2);"
 sql+="insert into User Values(4, 'Luigi','pass',1, 2);"
 sql+="insert into User Values(5, 'Yoshi','pass',1, 2);"
 sql+="insert into User Values(6, 'Bowser','pass',1, 3);"
-sql+="INSERT INTO Team Values(1,'Mario Party',1);"
+sql+="INSERT INTO Team Values(1,'Mario Party',1, 'I am Coach Bowser. These Are my Minions');"
 
 
 
@@ -88,7 +88,6 @@ app.use(fileUpload()); //configure file upload
 
 app.get('/',function(req,res){
     db.query('Select * from User;', function(err, rows, fields) {
-    db.end();
     if(!err)
     {
         console.log(rows);
@@ -161,6 +160,26 @@ connection.query('INSERT INTO User SET ?', data, function(error, results, fields
     });
 
     return res.redirect('/PlayerPage');
+});
+
+
+
+app.get('/team',function(req,res){
+    var query1='Select * from User where Team_Id=1;';
+    var query2='Select * from Team where Team_Id=1;';
+    db.query(query1+query2, function(err, rows, fields) {
+    if(!err)
+    {
+        console.log(rows);
+        console.log(rows.length)
+        res.render('pages/team.pug',{
+            data1:rows[0],
+            data2:rows[1]
+        });
+    }
+    else
+        console.log('encountered error');
+    });
 });
 
 app.listen(port, ()=> {
