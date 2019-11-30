@@ -1,6 +1,6 @@
 include ../partials/header.pug
 
-  
+
 img.img-fluid(src='../img/UmbrellaLogo1.png' alt='Registration')
 br
 br
@@ -10,7 +10,7 @@ br
   button.btn.btn-primary.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
 // Player Form
 #player_form.container
-  form(action='/submit_success')
+  form(action='PlayerPage.html')
     .form-group.row
       label.col-sm-2.col-form-label(for='player_fullName') Full Name
       .col-sm-10
@@ -30,12 +30,12 @@ br
     .form-group.row
       label.col-sm-2.col-form-label(for='player_passwordFirst') Password
       .col-sm-10
-        input#player_passwordFirst.form-control(type='password' name='player_passwordFirst' placeholder='Password')
+        input#player_passwordFirst.form-control(type='password' name='player_passwordFirst' placeholder='Password' onkeyup='myFunction()')
     .form-group.row
       label.col-sm-2.col-form-label(for='player_passwordConfirm') Confirm Password
       .col-sm-10
-        input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password')
-    
+        input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password' onkeyup='myFunction2()')
+
     .form-group.row
       label(for="selTeam")="Select Team"
       select.form-control(id="selTeam")
@@ -43,11 +43,11 @@ br
           for item in Data
             option(value=item.Team_Id)=item.TeamName
     .form-group.row
-      input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
+      button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' onclick='onClickFunction()') Submit
   br
 // Coach Form
 #coach_form.container
-  form(action='/submit_sucess')
+  form(action='PlayerPage.html')
     .form-group.row
       label.col-sm-2.col-form-label(for='coach_fullName') Full Name
       .col-sm-10
@@ -77,4 +77,4 @@ br
       .col-sm-10
         input#coach_createTeam.form-control(type='new_team_name' name='coach_createTeam' placeholder='Enter Team Name')
     .form-group.row
-      input.btn.btn-secondary.btn-block(type='submit' value='Submit')
+      button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' onclick='onClickFunction()') Submit

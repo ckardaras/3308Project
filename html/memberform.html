@@ -17,7 +17,7 @@
 	<br>
     <!-- Buttons to select if coach or player -->
   <div class= "btn-group form-group">
-	  <form>	  
+	  <form>
     	<button class="button buttonC" value="C" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)">Coach</button>
 		<button class="button buttonP" value="P" onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()">Player</button>
 	</form>
@@ -75,7 +75,9 @@
           <div id="team_selector" class="dropdown-menu" aria-labelledby="selectPlayerButton">
           </div>
         </div>
-			<input type="submit" value="Submit" class="btn btn-primary btn-block" style="background-color: #61A0CC; border-color: #3D6480">
+			<!-- <input type="submit" value="Submit" class="btn btn-primary btn-block" style="background-color: #61A0CC; border-color: #3D6480"> -->
+      <button id="my_submit_button" class="btn btn-primary btn-block login-btn" disabled
+        onClick="onClickFunction()">Submit</button>
 		</form>
 		<br>
 	</div>
@@ -91,7 +93,7 @@
       <div class="form-group row">
 				<label class="col-sm-2 col-form-label" for="coach_userName">Username</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="coach_userName" id="coach_userName"  placeholder="Enter Username">
+					<input type="text" class="form-control" name="coach_userName" id="coach_userName"  placeholder="Enter Username" >
 				</div>
 			</div>
 			<div class="form-group row">

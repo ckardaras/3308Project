@@ -107,9 +107,8 @@ app.get('/',function(req,res){
     if(!err)
     {
         console.log(rows);
-        res.render('pages/login.pug',{
-            data:rows,
-            css:"../css/login.css"
+        res.render('pages/test.pug',{
+            data:rows
         });
     }
     else
@@ -118,16 +117,10 @@ app.get('/',function(req,res){
 
 });
 
-app.get('/submit_success',function(req,res){
-    res.render('pages/submit_success.pug', {
-        css:"../css/submit_success.css"
-    });
-});
-
 // login page
 app.get('/login', function(req, res) {
 	res.render('pages/login',{
-		css:"../css/login.css",
+		local_css:"../../css/style1", //don't think we need this since we did internal css in our pug
 		my_title:"Login Page"
 	});
 });
@@ -165,9 +158,9 @@ app.get('/register', function(req, res) {
                 my_title:"Registration Page",
                 css:"../css/register.css",
                 Data:rows
-            })     
+            })
         }
-        else 
+        else
             console.log('Encountered Error')
 	});
 });
