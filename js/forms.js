@@ -22,7 +22,7 @@ function createTeam(team_id)
 
 function loadTeams()
 {
-	if(teams.length == 0)
+	if(!Data)
 	{
 		window.alert("There are no teams created.");
 		return;

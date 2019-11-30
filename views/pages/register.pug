@@ -1,12 +1,13 @@
 include ../partials/header.pug
+
   
 img.img-fluid(src='../img/UmbrellaLogo1.png' alt='Registration')
 br
 br
 // Buttons to select if coach or player
 .btn-group
-  button.button.buttonC(value='C' onclick="viewForm('coach_form', 1); viewForm('player_form', 0)") Coach
-  button.button.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
+  button.btn.btn-secondary.buttonC(value='C' onload="viewForm('coach_form', 1); viewForm('player_form', 0)" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)") Coach
+  button.btn.btn-primary.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
 // Player Form
 #player_form.container
   form(action='PlayerPage.html')
@@ -34,19 +35,15 @@ br
       label.col-sm-2.col-form-label(for='player_passwordConfirm') Confirm Password
       .col-sm-10
         input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password')
-    //
-      <fieldset class="form-group">
-      <div class="row" id="team">
-      <select name="team_name" id="team_joined" class="custom-select custom-select-sm">
-      <option selected>Select Team</option>
-      </select>
-      </div>
-      </fieldset>
-    .dropdown
-      button#selectTeamButton.btn.btn-block.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='background-color: #7AC8FF; border-color: #3D6480')
-        | Select a Team
-      #team_selector.dropdown-menu(aria-labelledby='selectPlayerButton')
-    input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
+    
+    .form-group.row
+      label(for="selTeam")="Select Team"
+      select.form-control(id="selTeam")
+        if(Data)
+          for item in Data
+            option(value=item.Team_Id)=item.TeamName
+    .form-group.row
+      input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
   br
 // Coach Form
 #coach_form.container
@@ -79,5 +76,5 @@ br
       label.col-sm-2.col-form-label(for='coach_createTeam') Create a Team
       .col-sm-10
         input#coach_createTeam.form-control(type='new_team_name' name='coach_createTeam' placeholder='Enter Team Name')
-    input.btn.btn-primary.btn-block(type='button' value='Temporary create team button - would be combined with Submit in final proj' onclick="createTeam('coach_createTeam')" style='background-color: #61A0CC; border-color: #3D6480')
-    input.btn.btn-primary.btn-block(type='submit' value='Submit' style='background-color: #61A0CC; border-color: #3D6480')
+    .form-group.row
+      input.btn.btn-secondary.btn-block(type='submit' value='Submit')

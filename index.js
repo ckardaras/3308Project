@@ -64,6 +64,7 @@ sql+="insert into User Values(4, 'Luigi','pass',1, 2);"
 sql+="insert into User Values(5, 'Yoshi','pass',1, 2);"
 sql+="insert into User Values(6, 'Bowser','pass',1, 3);"
 sql+="INSERT INTO Team Values(1,'Mario Party',1, 'I am Coach Bowser. These Are my Minions');"
+sql+="INSERT INTO Team Values(2,'Another Test Team',1, 'This is another Test Team');"
 
 
 
@@ -84,10 +85,18 @@ global.db=db;
 app.set('port',process.env.port || port); //set express to use this port
 app.set('views', __dirname + '/views'); //set express to look in this folder to render views
 app.set('view engine', 'pug'); //configure template engine
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //parse form data client
 app.use(express.static(__dirname + '/'));
 app.use(fileUpload()); //configure file upload
+app.use(session({
+    secret: 'eioptuwlkgmhi',
+    resave: true,
+    saveUninitialized: false
+
+}));
+
 
 
 
@@ -138,9 +147,21 @@ app.post('/auth', function(req, res) {
 
 // registration page
 app.get('/register', function(req, res) {
-	res.render('pages/register',{
-    local_css:"my_style.css",
-		my_title:"Registration Page"
+    var query1="Select TeamName,Team_Id from Team where Team_Id>0;";
+    db.query(query1, function(err,rows,fields){
+        if(!err)
+        {
+            console.log(rows);
+            res.render('pages/register',
+            {
+                local_css:"my_style.css",
+                my_title:"Registration Page",
+                css:"../css/register.css",
+                Data:rows
+            })     
+        }
+        else 
+            console.log('Encountered Error')
 	});
 });
 
