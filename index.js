@@ -108,7 +108,7 @@ app.get('/',function(req,res){
     {
         console.log(rows);
         res.render('pages/login.pug',{
-            data:rows
+            data:rows,
             css:"../css/login.css"
         });
     }
