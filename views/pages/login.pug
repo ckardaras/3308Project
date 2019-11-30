@@ -30,12 +30,12 @@ include ../partials/header.pug
               button.btn.btn-primary(type='submit') Login
               br
               br
-            .row
-              .col-sm
-                p
-                  | New here?
-              .col-sm
-                button.btn.btn-secondary.btn-light Sign Up
+          .row
+            .col-sm
+              p="New here?"
+            .col-sm
+              form(action="/register")
+                input.btn.btn-secondary.btn-light(type="submit" value="Sign Up")
   // Will add javascript to go through an array of testimonial
   h2 Testimonials
   .container2

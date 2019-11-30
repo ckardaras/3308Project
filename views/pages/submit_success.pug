@@ -1,0 +1,11 @@
+include ../partials/header.pug
+.container
+    .jumbotron.center
+        h3.text-center Sucess! 
+        br
+        h3.text-center Now go back to the login page!
+        form#reroute(action="/login")
+            .row
+            .col-md-4
+            .col-md-4
+                input.btn.btn-primary(type="submit" value="Login Page")

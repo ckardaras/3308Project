@@ -10,7 +10,7 @@ br
   button.btn.btn-primary.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
 // Player Form
 #player_form.container
-  form(action='PlayerPage.html')
+  form(action='/submit_success')
     .form-group.row
       label.col-sm-2.col-form-label(for='player_fullName') Full Name
       .col-sm-10
@@ -47,7 +47,7 @@ br
   br
 // Coach Form
 #coach_form.container
-  form(action='PlayerPage.html')
+  form(action='/submit_sucess')
     .form-group.row
       label.col-sm-2.col-form-label(for='coach_fullName') Full Name
       .col-sm-10
