@@ -19,13 +19,13 @@ include ../partials/header.pug
         header
           h1 Sign In
         .jumbotron
-          form(method='post' action='#')
+          form(action='./auth', method='post' )
             .form-group
-              label(for='uname') Username
-              input.form-control(type='text' placeholder='Enter Username' name='uname')
+              label(for='username') Username
+              input.form-control(type='text' placeholder='Enter Username' name='username')
             .form-group
-              label(for='psw') Password
-              input.form-control(type='password' placeholder='Enter Password' name='psw')
+              label(for='password') Password
+              input.form-control(type='password' placeholder='Enter Password' name='password')
             .form-group
               button.btn.btn-primary(type='submit') Login
               br

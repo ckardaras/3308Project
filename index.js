@@ -103,7 +103,7 @@ app.use(session({
 
 
 app.get('/',function(req,res){
-    db.query('Select * from User;', function(err, rows, fields) {
+    db.query('Select Username,Password from User;', function(err, rows, fields) {
     if(!err)
     {
         console.log(rows);
@@ -134,13 +134,16 @@ app.get('/login', function(req, res) {
 
 app.post('/auth', function(req, res) {
 	var username = req.body.username;
-	var password = req.body.password;
+    var password = req.body.password;
 	if (username && password) {
-		connection.query('SELECT * FROM USER WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-			if (results.length > 0) {
-				req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
+		db.query('select username, password from User where username =?',[username], function(error, rows, fields){
+            console.log(rows);
+            console.log(rows[0].password);
+            console.log('fin');
+			if (rows[0].password==password){
+                req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
 				req.session.username = username;
-				res.redirect('/PlayerPage');
+				res.redirect('/team');
 			} else {
 				res.send('Incorrect Username and/or Password!');
 			}
@@ -150,6 +153,16 @@ app.post('/auth', function(req, res) {
 		res.send('Please enter Username and Password!');
 		res.end();
 	}
+});
+
+app.get('/login/auth', function(req, res) 
+{
+    res.render('pages/login');
+});
+
+app.get('/PlayerPage', function(req, res) 
+{
+    res.render('/team');
 });
 
 // registration page
@@ -205,8 +218,6 @@ app.get('/team',function(req,res){
     db.query(query1+query2, function(err, rows, fields) {
     if(!err)
     {
-        console.log(rows);
-        console.log(rows.length)
         res.render('pages/team.pug',{
             data1:rows[0],
             data2:rows[1]
