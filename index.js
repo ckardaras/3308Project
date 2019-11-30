@@ -143,7 +143,7 @@ app.post('/auth', function(req, res) {
 			if (rows[0].password==password){
                 req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
 				req.session.username = username;
-				res.redirect('/team');
+				res.redirect('/home');
 			} else {
 				res.send('Incorrect Username and/or Password!');
 			}
@@ -155,15 +155,25 @@ app.post('/auth', function(req, res) {
 	}
 });
 
-app.get('/login/auth', function(req, res) 
+app.get('/login/auth', function(req, res)
 {
     res.render('pages/login');
 });
 
-app.get('/PlayerPage', function(req, res) 
-{
-    res.render('/team');
+// app.get('/PlayerPage', function(req, res)
+// {
+//     res.render('/team');
+// });
+
+
+// login page
+app.get('/home', function(req, res) {
+	res.render('pages/PlayerPage',{
+		css:"../css/PlayerPage.css",
+		my_title:"Home page"
+	});
 });
+
 
 // registration page
 app.get('/register', function(req, res) {

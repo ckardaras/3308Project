@@ -18,9 +18,9 @@ nav.navbar.navbar-light.navbar-expand-lg.fixed-top.bg-white.clean-navbar
     #navcol-1.collapse.navbar-collapse
       ul.nav.navbar-nav.ml-auto
         li.nav-item(role='presentation')
-          a.nav-link(href='PlayerPage.html') Home
+          a.nav-link(href='/home') Home
         li.nav-item(role='presentation')
-          a.nav-link(href='teampage.html') Team Page
+          a.nav-link(href='/team') Team Page
         li.nav-item(role='presentation')
           a.nav-link(href='bracketpage.html') Stats
 main.page.testimonials
@@ -50,12 +50,12 @@ main.page.testimonials
                 -source="../img/portrait/"+item.username+".jpg"
                   img.rounded.mx-auto(src=source)
                   h4.text-center=item.username
-                  if item.UserGroup_Id === 2 
+                  if item.UserGroup_Id === 2
                     h5.text-center.text-primary Player
                   else
                     h5.text-center.text-primary Coach
             -count++
-        
+
     br
     p Upcoming Matches
     ul.list-group
