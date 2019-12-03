@@ -137,6 +137,9 @@ app.get('/submit_success',function(req,res){
 app.post('/auth', function(req, res) {
 	var username = req.body.username;
     var password = req.body.password;
+    req.session.name=username;
+    console.log(req.session.name);
+    console.log('fin');
 	if (username && password) {
 		db.query('select username, password from User where username =?',[username], function(error, rows, fields){
             console.log(rows);
@@ -176,10 +179,22 @@ app.get('/login/auth', function(req, res)
 
 // login page
 app.get('/home', function(req, res) {
-	res.render('pages/PlayerPage',{
-		css:"../css/PlayerPage.css",
-		my_title:"Home page"
-	});
+    if(req.session.name===undefined)
+    {
+        res.redirect('/login')
+    }
+    var query="Select * from User where username=";
+    query+=req.session.name;
+    query+=";";
+    db.query('select * from User where username =?;',[req.session.name],function(error, rows, fields)
+    {
+        console.log(rows);
+        res.render('pages/PlayerPage',{
+            css:"../css/PlayerPage.css",
+            my_title:"Home page",
+            data: rows
+        });
+    });
 });
 
 
@@ -231,6 +246,10 @@ connection.query('INSERT INTO User Values('+name+');',function(error, results, f
 
 
 app.get('/team',function(req,res){
+    if(req.session.name===undefined)
+    {
+        res.redirect('/login')
+    }
     var query1='Select * from User where Team_Id=1;';
     var query2='Select * from Team where Team_Id=1;';
     db.query(query1+query2, function(err, rows, fields) {
