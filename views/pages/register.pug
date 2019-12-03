@@ -30,11 +30,11 @@ br
     .form-group.row
       label.col-sm-2.col-form-label(for='player_passwordFirst') Password
       .col-sm-10
-        input#player_passwordFirst.form-control(type='password' name='player_passwordFirst' placeholder='Password' onkeyup='myFunction()')
+        input#player_passwordFirst.form-control(type='password' name='player_passwordFirst' placeholder='Password' onkeyup='PasswordCheck()')
     .form-group.row
       label.col-sm-2.col-form-label(for='player_passwordConfirm') Confirm Password
       .col-sm-10
-        input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password' onkeyup='myFunction2()')
+        input#player_passwordConfirm.form-control(type='password' name='player_passwordConfirm' placeholder='Confirm Password' )
 
     .form-group.row
       label(for="selTeam")="Select Team"
@@ -67,14 +67,14 @@ br
     .form-group.row
       label.col-sm-2.col-form-label(for='coach_passwordFirst') Password
       .col-sm-10
-        input#coach_passwordFirst.form-control(type='password' name='coach_passwordFirst' placeholder='Password')
+        input#coach_passwordFirst.form-control(type='password' name='coach_passwordFirst' placeholder='Password' onkeyup='PasswordCheck()')
     .form-group.row
       label.col-sm-2.col-form-label(for='coach_passwordConfirm') Confirm Password
       .col-sm-10
-        input#coach_passwordConfirm.form-control(type='password' name='coach_passwordConfirm' placeholder='Confirm Password')
+        input#coach_passwordConfirm.form-control(type='password' name='coach_passwordConfirm' placeholder='Confirm Password' )
     .form-group.row
       label.col-sm-2.col-form-label(for='coach_createTeam') Create a Team
       .col-sm-10
         input#coach_createTeam.form-control(type='new_team_name' name='coach_createTeam' placeholder='Enter Team Name')
     .form-group.row
-      button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' onclick='onClickFunction()') Submit
+      button#my_submit_button2.btn.btn-primary.btn-block.login-btn(disabled='' onclick='onClickFunction()') Submit

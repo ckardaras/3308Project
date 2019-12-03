@@ -240,7 +240,7 @@ connection.query('INSERT INTO User Values('+name+');',function(error, results, f
 
     });
 
-    return res.redirect('/PlayerPage');
+    return res.redirect('/login');
 });
 
 
