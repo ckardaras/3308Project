@@ -23,9 +23,15 @@ include ../partials/header.pug
             .form-group
               label(for='username') Username
               input.form-control(type='text' placeholder='Enter Username' name='username')
+              if(got_in==false)
+                p(style='color:red')="Oops! Password/Username is incorrect!"
+              if(user_req==false)
+                p(style='color:red')="Username is required!"
             .form-group
               label(for='password') Password
               input.form-control(type='password' placeholder='Enter Password' name='password')
+              if(pass_req==false)
+                p(style='color:red')="Password is required!"
             .form-group
               button.btn.btn-primary(type='submit') Login
               br

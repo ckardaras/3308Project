@@ -97,39 +97,41 @@ app.use(session({
 
 }));
 
+var pass_req=true;
+var user_req=true;
+var got_in=true;
+
 
 
 
 
 
 app.get('/',function(req,res){
-    db.query('Select Username,Password from User;', function(err, rows, fields) {
-    if(!err)
-    {
-        console.log(rows);
-        res.render('pages/login.pug',{
-            data:rows,
-            css:"../css/login.css"
-        });
-    }
-    else
-        console.log('encountered error');
-    });
-
+    res.redirect('/login');
 });
 
-app.get('/submit_success',function(req,res){
-    res.render('pages/submit_success.pug', {
-        css:"../css/submit_success.css"
-    });
-});
 
 // login page
 app.get('/login', function(req, res) {
 	res.render('pages/login',{
 		css:"../css/login.css",
-		my_title:"Login Page"
-	});
+        my_title:"Login Page",
+        pass_req: pass_req,
+        user_req: user_req,
+        got_in: got_in
+    });
+    got_in=true;
+    pass_req=true;
+    user_req=true;
+});
+
+
+
+
+app.get('/submit_success',function(req,res){
+    res.render('pages/submit_success.pug', {
+        css:"../css/submit_success.css"
+    });
 });
 
 app.post('/auth', function(req, res) {
@@ -139,18 +141,29 @@ app.post('/auth', function(req, res) {
 		db.query('select username, password from User where username =?',[username], function(error, rows, fields){
             console.log(rows);
             console.log(rows[0].password);
-            console.log('fin');
 			if (rows[0].password==password){
                 req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
 				req.session.username = username;
 				res.redirect('/home');
 			} else {
-				res.send('Incorrect Username and/or Password!');
+                got_in=false;
+                res.redirect('/login')
 			}
 			res.end();
 		});
 	} else {
-		res.send('Please enter Username and Password!');
+        got_in=false;
+        if(password=="")
+        {
+            pass_req=false;
+            got_in=true;
+        }
+        if(username=="")
+        {
+            user_req=false;
+            got_in=true;
+        }
+		res.redirect('/login');
 		res.end();
 	}
 });
@@ -159,11 +172,6 @@ app.get('/login/auth', function(req, res)
 {
     res.render('pages/login');
 });
-
-// app.get('/PlayerPage', function(req, res)
-// {
-//     res.render('/team');
-// });
 
 
 // login page
@@ -211,7 +219,7 @@ app.post('/sign_up', function(req,res){
         "passwordconfirm":pass2,
         "phone":phone
     }
-connection.query('INSERT INTO User SET ?', data, function(error, results, fields){
+connection.query('INSERT INTO User Values('+name+');',function(error, results, fields){
         if (err) throw err;
         console.log("Record inserted Successfully");
 
