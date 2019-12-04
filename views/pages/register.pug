@@ -1,6 +1,5 @@
 include ../partials/header.pug
 
-
 img.img-fluid(src='../img/UmbrellaLogo1.png' alt='Registration')
 br
 br
@@ -9,6 +8,11 @@ body
 .btn-group
   button.btn.btn-secondary.buttonC(value='C' onload="viewForm('coach_form', 1); viewForm('player_form', 0)" onclick="viewForm('coach_form', 1); viewForm('player_form', 0)") Coach
   button.btn.btn-primary.buttonP(value='P' onclick="viewForm('player_form', 1); viewForm('coach_form', 0); loadTeams()") Player
+  //get largest team id+1 from db
+  for item in Max
+    form(action="#")
+      select(name='big')
+        option(value=item.big, selected)=item.big
 // Player Form
 #player_form.container
   form(action='./sign_up_p', method='post' )

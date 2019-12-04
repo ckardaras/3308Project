@@ -212,16 +212,20 @@ app.get('/home', function(req, res) {
 // registration page
 app.get('/register', function(req, res) {
     var query1="Select TeamName,Team_Id from Team where Team_Id>0;";
-    db.query(query1, function(err,rows,fields){
+    query2="Select Max(Team_id)+1 as big from Team;";
+    db.query(query1+query2, function(err,rows,fields){
         if(!err)
         {
             console.log(rows);
+            console.log('Here');
+            console.log(req.body.big);
             res.render('pages/register',
             {
                 local_css:"my_style.css",
                 title:"Registration Page",
                 css:"../css/register.css",
-                Data:rows
+                Data:rows[0],
+                Max:rows[1]
             })
         }
         else
@@ -263,12 +267,16 @@ app.post('/sign_up_c', function(req,res){
     var pass2 = req.body.coach_passwordConfirm;
     var phone =req.body.coach_phoneNumber;
     var teamname = req.body.coach_createTeam;
-    var teamid = 0;
+    var teamid = req.body.big;
+    console.log('result');
+    console.log(teamid);
 
 var query0 = "INSERT INTO Team (TeamName,Active,TeamDesc) VALUES ('" + teamname + "', 1,'Meet our new team')";
 var query3 = "SELECT * FROM Team WHERE TeamName = ?";
 var query1="INSERT INTO User (username,password,Team_Id,UserGroup_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "',1)";
 var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
+
+
 db.query(query0,function(error, results){
         if (error) throw error;
         console.log("Team Created Successfully");

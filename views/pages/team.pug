@@ -4,8 +4,12 @@ main.page.testimonials
   section.clean-block.dark
     .container
       .block-heading
-        h2.text-info=data2[0].TeamName
-        p.lead=data2[0].TeamDesc
+      -var i=1;
+      for item in data2
+        if(i==1)
+          h2.text-info.text-center=item.TeamName
+          p.lead.text-center=item.TeamDesc
+        -i++;
       .row
         .col
           button.btn.btn-primary(type='button') +
