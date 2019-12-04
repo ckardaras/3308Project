@@ -264,10 +264,9 @@ app.post('/sign_up_c', function(req,res){
     var phone =req.body.coach_phoneNumber;
     var teamname = req.body.coach_createTeam;
     var teamid = 0;
-    console.log(teamname);
 
 var query0 = "INSERT INTO Team (TeamName,Active,TeamDesc) VALUES ('" + teamname + "', 1,'Meet our new team')";
-var query3 = "SELECT * FROM Team WHERE TeamName = teamname";
+var query3 = "SELECT * FROM Team WHERE TeamName = ?";
 var query1="INSERT INTO User (username,password,Team_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "')";
 var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
 db.query(query0,function(error, results){
@@ -276,10 +275,11 @@ db.query(query0,function(error, results){
 
     });
 
-db.query(query3, function(error, rows, fields){
+db.query(query3,[teamname], function(error, rows, fields){
         if (error) throw error;
-        console.log(rows[0].Team_Id);
         teamid = rows[0].Team_Id;
+        var teamn = rows[0].TeamName;
+        console.log(teamn);
     });
 db.query(query1,function(error, results){
         if (error) throw error;
