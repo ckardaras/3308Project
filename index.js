@@ -230,12 +230,13 @@ app.get('/register', function(req, res) {
 });
 
 app.post('/sign_up_p', function(req,res){
-    var name = req.player_form.player_fullName;
-    var username = req.player_form.player_userName;
-    var email =req.player_form.player_emailAddress;
-    var pass = req.player_form.player_passwordFirst;
-    var pass2 = req.player_form.player_passwordConfirm;
-    var phone =req.player_form.player_phoneNumber;
+    var name = req.body.player_fullName;
+    var username = req.body.player_userName;
+    var email =req.body.player_emailAddress;
+    var pass = req.body.player_passwordFirst;
+    var pass2 = req.body.player_passwordConfirm;
+    var phone =req.body.player_phoneNumber;
+    var teamid = req.body.selTeam.Team_Id;
 
     var data = {
         "name": name,
@@ -245,9 +246,9 @@ app.post('/sign_up_p', function(req,res){
         "passwordconfirm":pass2,
         "phone":phone
     }
-var query1="INSERT INTO User ()";
+var query1="INSERT INTO User (username,password,Team_Id) VALUES (username,pass,teamid)";
 var query2;
-connection.query('INSERT INTO User Values('+name+');',function(error, results, fields){
+connection.query(query1,function(error, results, fields){
         if (err) throw err;
         console.log("Record inserted Successfully");
 
