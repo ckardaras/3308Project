@@ -73,7 +73,7 @@ sql+="insert into User(username,password,Team_Id,UserGroup_Id) Values('Bowser','
 sql+="INSERT INTO Profile(email,phone,ProfilePicLink,name) Values('CoachBowser@gmail.com','5555555555','../img/portrait/Bowser.jpg','King Koopa');"
 
 sql+="insert into User(username,password,Team_Id,UserGroup_Id) Values('Somebody','password',2, 1);"
-sql+="INSERT INTO Profile(email,phone,ProfilePicLink,name) Values('Test@gmail.com','5555555555','../img/portrait/Bowser.jpg','Fred');"
+sql+="INSERT INTO Profile(email,phone,ProfilePicLink,name) Values('Test@gmail.com','5555555555','../img/portrait/Somebody.jpg','Fred Nobody');"
 
 sql+="INSERT INTO Team Values(1,'Mario Party',1, 'I am Coach Bowser. These Are my Minions');"
 sql+="INSERT INTO Team Values(2,'Another Test Team',1, 'This is another Test Team');"
@@ -245,7 +245,8 @@ app.post('/sign_up_p', function(req,res){
         "passwordconfirm":pass2,
         "phone":phone
     }
-var query1="INSERT INTO User ()"
+var query1="INSERT INTO User ()";
+var query2;
 connection.query('INSERT INTO User Values('+name+');',function(error, results, fields){
         if (err) throw err;
         console.log("Record inserted Successfully");
@@ -272,7 +273,7 @@ app.get('/team',function(req,res){
     query2+=req.session.name;
     query2+="'));";
 
-    var query3="Select p.name from User u inner join Profile p on u.User_Id=p.User_Id inner join Team t on t.Team_Id=u.Team_Id Where u.Team_Id=(Select Team_Id from User where username IN('";
+    var query3="Select p.name, u.UserGroup_Id, p.ProfilePicLink from User u inner join Profile p on u.User_Id=p.User_Id inner join Team t on t.Team_Id=u.Team_Id Where u.Team_Id=(Select Team_Id from User where username IN('";
     query3+=req.session.name;
     query3+="'));";
     db.query(query1+query2+query3, function(err, rows, fields) {

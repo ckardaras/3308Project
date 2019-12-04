@@ -10,9 +10,9 @@ main.page.testimonials
         .col
           button.btn.btn-primary(type='button') +
       br
-      if(data1)
+      if(data3)
       -var count=0
-        for item in data1
+        for item in data3
           if (count>0 && count%3==0)
             </div><div class="row">
           else if (count==0)
@@ -24,9 +24,9 @@ main.page.testimonials
                     button.btn
                       i.fa.fa-trash
                 -var source=""
-                -source="../img/portrait/"+item.username+".jpg"
+                -source=item.ProfilePicLink
                   img.rounded.mx-auto(src=source)
-                  h4.text-center=item.username
+                  h4.text-center=item.name
                   if item.UserGroup_Id === 2
                     h5.text-center.text-primary Player
                   else
