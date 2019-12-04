@@ -1,22 +1,4 @@
-
-
-#logo {
-  height: 60px;
-  width: 60px;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-
-
-/*
-img, svg {
-  height: 100px;
-  width: 100px;
-  margin-left: 95px;
-  margin-right: 10px;
-}
-*/
+@import "teampage.css";
 
 #playerimage
 {

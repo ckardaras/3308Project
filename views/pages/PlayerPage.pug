@@ -1,32 +1,6 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
-  title Player Page
-  link(rel='icon' href='../img/UmbrellaLogo.png')
-  link(rel='stylesheet' href='../css/bootstrap.min.css')
-  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i')
-  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS' crossorigin='anonymous')
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='../css/PlayerPage.css')
-main.player.page
-  nav#navbar.navbar.navbar-light.navbar-expand-lg.fixed-top.bg-white.clean-navbar
-    .container
-      img(src='../img/UmbrellaLogo1.png' style='width:200px; height:70px;')
-      button.navbar-toggler(data-toggle='collapse' data-target='#navcol-1')
-        span.sr-only Toggle navigation
-        span.navbar-toggler-icon
-      #navcol-1.collapse.navbar-collapse
-        ul.nav.navbar-nav.ml-auto
-          li.nav-item(role='presentation')
-            a.nav-link(href='/home') Home
-          li.nav-item(role='presentation')
-            a.nav-link(href='/team') Team Page
-          li.nav-item(role='presentation')
-            a.nav-link(href='bracketpage.html') Stats
-  br
-  br(style='padding-top: 10')
-  br
+include ../partials/header.pug
+include ../partials/nav.pug
+main.page.testimonials
   .container(style='background-color: lightblue; border-radius: 10px; margin-top: 60px; overflow-x:auto;')
     img#playerimage(src='../img/defaultplayer.png' alt='Avatar' style='margin-left: 0; overflow-x:auto')
     for item in data

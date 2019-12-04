@@ -113,6 +113,7 @@ app.get('/',function(req,res){
 
 // login page
 app.get('/login', function(req, res) {
+    req.session.name=undefined;
 	res.render('pages/login',{
 		css:"../css/login.css",
         my_title:"Login Page",
@@ -137,16 +138,14 @@ app.get('/submit_success',function(req,res){
 app.post('/auth', function(req, res) {
 	var username = req.body.username;
     var password = req.body.password;
-    req.session.name=username;
     console.log(req.session.name);
-    console.log('fin');
 	if (username && password) {
 		db.query('select username, password from User where username =?',[username], function(error, rows, fields){
             console.log(rows);
             console.log(rows[0].password);
 			if (rows[0].password==password){
                 req.session.loggedin = true; //if username and password are correct the you get redirected to Player page
-				req.session.username = username;
+				req.session.name = username;
 				res.redirect('/home');
 			} else {
                 got_in=false;
@@ -190,8 +189,8 @@ app.get('/home', function(req, res) {
     {
         console.log(rows);
         res.render('pages/PlayerPage',{
-            css:"../css/PlayerPage.css",
-            my_title:"Home page",
+            css:'../css/PlayerPage.css',
+            title:"Home page",
             data: rows
         });
     });
@@ -208,7 +207,7 @@ app.get('/register', function(req, res) {
             res.render('pages/register',
             {
                 local_css:"my_style.css",
-                my_title:"Registration Page",
+                title:"Registration Page",
                 css:"../css/register.css",
                 Data:rows
             })
@@ -256,8 +255,10 @@ app.get('/team',function(req,res){
     if(!err)
     {
         res.render('pages/team.pug',{
+            css:'../css/teampage.css',
             data1:rows[0],
-            data2:rows[1]
+            data2:rows[1],
+            title:'Team Page'
         });
     }
     else
