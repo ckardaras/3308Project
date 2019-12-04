@@ -236,18 +236,34 @@ app.post('/sign_up_p', function(req,res){
     var pass = req.body.player_passwordFirst;
     var pass2 = req.body.player_passwordConfirm;
     var phone =req.body.player_phoneNumber;
-    var teamid = -1;
+    var teamid = req.body.team;
+    var pic="../img/defaultplayer.png";
 
-    var data = {
-        "name": name,
-        "username": username2,
-        "email":email,
-        "password":pass,
-        "passwordconfirm":pass2,
-        "phone":phone
-    }
-    console.log("Testing shit");
-    console.log(teamid);
+var query1="INSERT INTO User (username,password,Team_Id,UserGroup_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "',2)";
+var query2 = "INSERT INTO Profile (email,phone,name,ProfilePicLink) VALUES ('" + email + "', '" + phone + "','" + name + "','" + pic +"')";
+db.query(query1,function(error, results){
+        if (error) throw error;
+        console.log("Record inserted Successfully");
+
+    });
+db.query(query2,function(error, results){
+        if (error) throw error;
+        console.log("Profile inserted Successfully");
+
+    });
+
+    return res.redirect('/login');
+});
+
+app.post('/submit_success', function(req,res){
+    var name = req.body.coach_fullName;
+    var username2 = req.body.coach_userName;
+    var email =req.body.coach_emailAddress;
+    var pass = req.body.coach_passwordFirst;
+    var pass2 = req.body.coach_passwordConfirm;
+    var phone =req.body.coach_phoneNumber;
+    var teamname = req.body.coach_createTeam;
+
 var query1="INSERT INTO User (username,password,Team_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "')";
 var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
 db.query(query1,function(error, results){
@@ -263,8 +279,6 @@ db.query(query2,function(error, results){
 
     return res.redirect('/login');
 });
-
-
 
 app.get('/team',function(req,res){
     if(req.session.name===undefined)

@@ -39,7 +39,7 @@ body
 
     .form-group.row
       label(for="selTeam")="Select Team"
-      select.form-control(id="selTeam")
+      select.form-control(id="selTeam" , name='team')
         if(Data)
           for item in Data
             option(value=item.Team_Id)=item.TeamName
