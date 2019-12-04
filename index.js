@@ -246,10 +246,10 @@ app.post('/sign_up_p', function(req,res){
         "passwordconfirm":pass2,
         "phone":phone
     }
-var query1="INSERT INTO User (username,password,Team_Id) VALUES (username,pass,teamid)";
+var query1="INSERT INTO User (username,password,Team_Id) VALUES (username,pass2,teamid)";
 var query2;
-connection.query(query1,function(error, results, fields){
-        if (err) throw err;
+db.query(query1,function(error, results, fields){
+        if (error) throw error;
         console.log("Record inserted Successfully");
 
     });
