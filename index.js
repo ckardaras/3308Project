@@ -231,24 +231,26 @@ app.get('/register', function(req, res) {
 
 app.post('/sign_up_p', function(req,res){
     var name = req.body.player_fullName;
-    var username = req.body.player_userName;
+    var username2 = req.body.player_userName;
     var email =req.body.player_emailAddress;
     var pass = req.body.player_passwordFirst;
     var pass2 = req.body.player_passwordConfirm;
     var phone =req.body.player_phoneNumber;
-    var teamid = req.body.Team_Id;
+    var teamid = -1;
 
     var data = {
         "name": name,
-        "username": username,
+        "username": username2,
         "email":email,
         "password":pass,
         "passwordconfirm":pass2,
         "phone":phone
     }
-var query1="INSERT INTO User (username,password,Team_Id) VALUES (username,pass2,teamid)";
+    console.log("Testing shit");
+    console.log(teamid);
+var query1="INSERT INTO User (username,password,Team_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "')";
 var query2;
-db.query(query1,function(error, results, fields){
+db.query(query1,function(error, results){
         if (error) throw error;
         console.log("Record inserted Successfully");
 
