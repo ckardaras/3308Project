@@ -249,10 +249,15 @@ app.post('/sign_up_p', function(req,res){
     console.log("Testing shit");
     console.log(teamid);
 var query1="INSERT INTO User (username,password,Team_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "')";
-var query2;
+var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
 db.query(query1,function(error, results){
         if (error) throw error;
         console.log("Record inserted Successfully");
+
+    });
+db.query(query2,function(error, results){
+        if (error) throw error;
+        console.log("Profile inserted Successfully");
 
     });
 
