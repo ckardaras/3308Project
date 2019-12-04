@@ -236,7 +236,7 @@ app.post('/sign_up_p', function(req,res){
     var pass = req.body.player_passwordFirst;
     var pass2 = req.body.player_passwordConfirm;
     var phone =req.body.player_phoneNumber;
-    var teamid = req.body.selTeam.Team_Id;
+    var teamid = req.body.Team_Id;
 
     var data = {
         "name": name,
