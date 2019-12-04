@@ -267,7 +267,7 @@ app.post('/sign_up_c', function(req,res){
 
 var query0 = "INSERT INTO Team (TeamName,Active,TeamDesc) VALUES ('" + teamname + "', 1,'Meet our new team')";
 var query3 = "SELECT * FROM Team WHERE TeamName = ?";
-var query1="INSERT INTO User (username,password,Team_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "')";
+var query1="INSERT INTO User (username,password,Team_Id,UserGroup_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "',1)";
 var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
 db.query(query0,function(error, results){
         if (error) throw error;
