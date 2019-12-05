@@ -6,6 +6,10 @@ main.page.testimonials
       .card.border-2.border-primary(style="width:80%; margin:auto; margin-right:2.5%; margin-top:5%; padding:5%;")
         for item in data2
           img#playerimage(src=item.ProfilePicLink alt='Avatar' style='margin-left: 0px; overflow-x:auto; width:100%; height:auto; padding-left:0px;')
+      .form-group.row
+        label.col-form-label(for='input_img') Upload Image
+          input#input_img.form-control(type='file' name='input_img')
+          input#submit.form-control(type='submit' value='submit' onclick='setImg()')
     .col-md-6
       .card.border-2.border-primary(style="width:90%; margin:auto; margin-left:2.5%; margin-top:5%; padding:2.5%;")
         for item in data1
