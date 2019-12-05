@@ -7,17 +7,19 @@ main.page.testimonials
         for item in data2
           img#playerimage(src=item.ProfilePicLink alt='Avatar' style='margin-left: 0px; overflow-x:auto; width:100%; height:auto; padding-left:0px;')
       .form-group.row
-        select.custom-select(id="upload_image", onchange="setImg()")
-          option(selected) Upload Image
-          option(class='dropdown-item' href='#' value='1.png') Redheaded Man
-          option(class='dropdown-item' href='#' value='2.png') Curly Black Hair Man
-          option(class='dropdown-item' href='#' value='3.png') Black Hair Man
-          option(class='dropdown-item' href='#' value='4.png') Curly Brown Hair Man
-          option(class='dropdown-item' href='#' value='5.png') Brown Hair Man
-          option(class='dropdown-item' href='#' value='6.png') Blonde Woman
-          option(class='dropdown-item' href='#' value='7.png') Brown Hair Woman
-          option(class='dropdown-item' href='#' value='8.png') Redheaded Woman
-          option(class='dropdown-item' href='#' value='9.png') Black Hair Woman
+        form(action='/newpic',method='post')
+          select.custom-select(id="upload_image", onchange="setImg()", name="changepic")
+            option(selected) Choose A New Image
+            option(class='dropdown-item' href='#' value='1.png') Redheaded Man
+            option(class='dropdown-item' href='#' value='2.png') Curly Black Hair Man
+            option(class='dropdown-item' href='#' value='3.png') Black Hair Man
+            option(class='dropdown-item' href='#' value='4.png') Curly Brown Hair Man
+            option(class='dropdown-item' href='#' value='5.png') Brown Hair Man
+            option(class='dropdown-item' href='#' value='6.png') Blonde Woman
+            option(class='dropdown-item' href='#' value='7.png') Brown Hair Woman
+            option(class='dropdown-item' href='#' value='8.png') Redheaded Woman
+            option(class='dropdown-item' href='#' value='9.png') Black Hair Woman
+          button#my_submit_button2.btn.btn-primary.btn-block.login-btn(onclick='onClickFunction()') Change Image
     .col-md-6
       .card.border-2.border-primary(style="width:90%; margin:auto; margin-left:2.5%; margin-top:5%; padding:2.5%;")
         for item in data1
@@ -49,8 +51,8 @@ main.page.testimonials
             br
             br
 
-//We need to add attribution for the icons 
-div
+//We need to add attribution for the icons -i'm putting this in the comments
+//div
   | Icons made by
   a(href='https://www.flaticon.com/authors/freepik' title='Freepik') Freepik
   |  from

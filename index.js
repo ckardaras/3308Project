@@ -347,6 +347,26 @@ app.get('/team',function(req,res){
     });
 });
 
+
+//Update Changed picture in database
+app.post('/newpic', function(req,res){
+    newpic=req.body.changepic
+    var pic="../img/";
+    pic+=newpic;
+
+var query1="update Profile set ProfilePicLink ='"
+query1+=pic;
+query1+="' where User_Id=(Select User_Id from User where username IN ('";
+query1+=req.session.name;
+query1+="'));" 
+db.query(query1,function(error, results){
+        if (error) throw error;
+        console.log("Picture Updated Successfully");
+
+    });
+});
+
+
 // Match finder
 app.get('/matchfinder', function(req, res) {
     if(req.session.name===undefined)
