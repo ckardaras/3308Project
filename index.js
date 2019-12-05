@@ -358,7 +358,7 @@ var query1="update Profile set ProfilePicLink ='"
 query1+=pic;
 query1+="' where User_Id=(Select User_Id from User where username IN ('";
 query1+=req.session.name;
-query1+="'));" 
+query1+="'));"
 db.query(query1,function(error, results){
         if (error) throw error;
         console.log("Picture Updated Successfully");

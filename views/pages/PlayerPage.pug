@@ -6,7 +6,7 @@ main.page.testimonials
       .card.border-2.border-primary(style="width:80%; margin:auto; margin-right:2.5%; margin-top:5%; padding:5%;")
         for item in data2
           img#playerimage(src=item.ProfilePicLink alt='Avatar' style='margin-left: 0px; overflow-x:auto; width:100%; height:auto; padding-left:0px;')
-      .form-group.row
+      .form-group.row(style="width:80%; margin:auto; margin-right:2.5%; margin-top:2%; padding:5%;")
         form(action='/newpic',method='post')
           select.custom-select(id="upload_image", onchange="setImg()", name="changepic")
             option(selected) Choose A New Image
