@@ -24,7 +24,7 @@ const db = mysql.createConnection({
     multipleStatements:true
 });
 
-
+var Big=2;
 
 
 var sql ="DROP DATABASE IF EXISTS League; CREATE DATABASE League;" //Make New Database, drop existing League DB if exists
@@ -240,9 +240,9 @@ app.post('/sign_up_p', function(req,res){
     var pass = req.body.player_passwordFirst;
     var pass2 = req.body.player_passwordConfirm;
     var phone =req.body.player_phoneNumber;
-    var teamid = req.body.team;
+    var teamid =req.body.team;
+    console.log(teamid)
     var pic="../img/defaultplayer.png";
-
 var query1="INSERT INTO User (username,password,Team_Id,UserGroup_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "',2)";
 var query2 = "INSERT INTO Profile (email,phone,name,ProfilePicLink) VALUES ('" + email + "', '" + phone + "','" + name + "','" + pic +"')";
 db.query(query1,function(error, results){
@@ -260,6 +260,7 @@ db.query(query2,function(error, results){
 });
 
 app.post('/sign_up_c', function(req,res){
+    Big++;
     var name = req.body.coach_fullName;
     var username2 = req.body.coach_userName;
     var email =req.body.coach_emailAddress;
@@ -267,14 +268,13 @@ app.post('/sign_up_c', function(req,res){
     var pass2 = req.body.coach_passwordConfirm;
     var phone =req.body.coach_phoneNumber;
     var teamname = req.body.coach_createTeam;
-    var teamid = req.body.big;
-    console.log('result');
-    console.log(teamid);
+    var teamid = Big;
+    var pic="../img/defaultplayer.png";
 
 var query0 = "INSERT INTO Team (TeamName,Active,TeamDesc) VALUES ('" + teamname + "', 1,'Meet our new team')";
 var query3 = "SELECT * FROM Team WHERE TeamName = ?";
 var query1="INSERT INTO User (username,password,Team_Id,UserGroup_Id) VALUES ('" + username2 + "','" + pass + "','" + teamid + "',1)";
-var query2 = "INSERT INTO Profile (email,phone,name) VALUES ('" + email + "', '" + phone + "','" + name + "')";
+var query2 = "INSERT INTO Profile (email,phone,name, ProfilePicLink) VALUES ('" + email + "', '" + phone + "','" + name + "','" + pic +"')";
 
 
 db.query(query0,function(error, results){
