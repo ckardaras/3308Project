@@ -7,9 +7,17 @@ main.page.testimonials
         for item in data2
           img#playerimage(src=item.ProfilePicLink alt='Avatar' style='margin-left: 0px; overflow-x:auto; width:100%; height:auto; padding-left:0px;')
       .form-group.row
-        label.col-form-label(for='input_img') Upload Image
-          input#input_img.form-control(type='file' name='input_img')
-          input#submit.form-control(type='submit' value='submit' onclick='setImg()')
+        select.custom-select(id="upload_image", onchange="setImg()")
+          option(selected) Upload Image
+          option(class='dropdown-item' href='#' value='1.png') Redheaded Man
+          option(class='dropdown-item' href='#' value='2.png') Curly Black Hair Man
+          option(class='dropdown-item' href='#' value='3.png') Black Hair Man
+          option(class='dropdown-item' href='#' value='4.png') Curly Brown Hair Man
+          option(class='dropdown-item' href='#' value='5.png') Brown Hair Man
+          option(class='dropdown-item' href='#' value='6.png') Blonde Woman
+          option(class='dropdown-item' href='#' value='7.png') Brown Hair Woman
+          option(class='dropdown-item' href='#' value='8.png') Redheaded Woman
+          option(class='dropdown-item' href='#' value='9.png') Black Hair Woman
     .col-md-6
       .card.border-2.border-primary(style="width:90%; margin:auto; margin-left:2.5%; margin-top:5%; padding:2.5%;")
         for item in data1
