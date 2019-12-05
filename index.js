@@ -313,7 +313,7 @@ app.get('/team',function(req,res){
     query1+=req.session.name;
     query1+="'));";
 
-    
+
     var query2="Select * from Team where Team_Id=(Select Team_Id from User where username IN('";
     query2+=req.session.name;
     query2+="'));";
@@ -336,6 +336,22 @@ app.get('/team',function(req,res){
         console.log('encountered error');
     });
 });
+
+// Match finder
+app.get('/matchfinder', function(req, res) {
+    if(req.session.name===undefined)
+    {
+        res.redirect('/login')
+    }
+
+
+    res.render('pages/matchfinder',{
+        // css:'../css/PlayerPage.css',
+        title:"Match Finder"
+
+        });
+});
+
 
 app.listen(port, ()=> {
     console.log('Server running on port:',port);
