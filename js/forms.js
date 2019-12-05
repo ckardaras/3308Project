@@ -48,6 +48,8 @@ function pickedTeam(i)
 
 function setImg()
 {
-	console.log("../img/" + document.getElementById("input_img").value.split("\\").pop());
-	document.getElementById("playerimage").src = "../img/" + document.getElementById("input_img").value.split("\\").pop();
+	var e = document.getElementById("upload_image");
+	var strUser = e.options[e.selectedIndex].value
+	console.log("../img/" + strUser);
+	document.getElementById("playerimage").src = "../img/" + strUser;
 }
