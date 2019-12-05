@@ -9,39 +9,45 @@ main.page.testimonials
     .col-md-6
       .card.border-2.border-primary(style="width:90%; margin:auto; margin-left:2.5%; margin-top:5%; padding:2.5%;")
         for item in data1
-          h3 
-            strong Username: 
+          h3
+            strong Username:
             span #{item.username}<br/>
             br
             br
         for item in data3
           h3
-            strong Team Name: 
+            strong Team Name:
             span #{item.TeamName}<br/>
             br
             br
         for item in data2
-          h3 
-            strong Full Name: 
+          h3
+            strong Full Name:
             span #{item.name}<br/>
             br
             br
-          h3 
-            strong Email: 
+          h3
+            strong Email:
             span #{item.email}<br/>
             br
             br
-          h3 
-            strong Phone: 
+          h3
+            strong Phone:
             span #{item.phone}<br/>
             br
             br
-    
-    
-    
-    
-    
-    
+
+//We need to add attribution for the icons 
+div
+  | Icons made by
+  a(href='https://www.flaticon.com/authors/freepik' title='Freepik') Freepik
+  |  from
+  a(href='https://www.flaticon.com/' title='Flaticon') www.flaticon.com
+
+
+
+
+
 script(src='assets/bootstrap/js/bootstrap.min.js')
 script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
