@@ -3,6 +3,7 @@ include ../partials/nav.pug
 main.page.testimonials
 br
 br
+
 br
 .row
   .col-lg-6.mb-4
@@ -15,7 +16,7 @@ br
             .col.mr-2
               // html
               form
-                | Pick a date and time: 
+                | Pick a date and time:
                 input(type='datetime-local' name='datetime')
                 // <input type="submit" value="Send">
               br
@@ -35,11 +36,13 @@ br
         li.list-group-item
           .row.align-items-center.no-gutters
             .col.mr-2
-              h6.mb-0
+              h6.mb-0(name='teamname')
                 strong Gamer
               span.text-xs(name='time') 10:30 AM
               span.text-xs  -
               span.text-xs(name='date') 10/12/19
+              span.text-xs  -
+              span.text-xs(name='Location') Boulder
             .col-auto
               button.btn.btn-primary(type='button') Invite
         li.list-group-item
@@ -50,6 +53,8 @@ br
               span.text-xs(name='time') 10:30 AM
               span.text-xs  -
               span.text-xs(name='date') 10/12/19
+              span.text-xs  -
+              span.text-xs(name='Location') Denver
             .col-auto
               button.btn.btn-primary(type='button') Invite
         li.list-group-item
@@ -60,5 +65,7 @@ br
               span.text-xs(name='time') 10:30 AM
               span.text-xs  -
               span.text-xs(name='date') 10/12/19
+              span.text-xs  -
+              span.text-xs(name='Location') Greeley
             .col-auto
               button.btn.btn-primary(type='button') Invite
