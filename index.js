@@ -194,16 +194,26 @@ app.get('/home', function(req, res) {
     {
         res.redirect('/login')
     }
-    var query="Select * from User where username=";
-    query+=req.session.name;
-    query+=";";
-    db.query('select * from User where username =?;',[req.session.name],function(error, rows, fields)
+    var query1="Select * from User where username='";
+    query1+=req.session.name;
+    query1+="';";
+
+    var query2="select * from Profile where User_Id IN(Select User_Id from User where username='";
+    query2+=req.session.name;
+    query2+="' );";
+
+    var query3="select * from Team where Team_Id IN(Select Team_Id from User where username='";
+    query3+=req.session.name;
+    query3+="' );";
+    db.query(query1+query2+query3,function(error, rows, fields)
     {
-        console.log(rows);
+        console.log(rows[0]);
         res.render('pages/PlayerPage',{
             css:'../css/PlayerPage.css',
             title:"Home page",
-            data: rows
+            data1: rows[0],
+            data2: rows[1],
+            data3: rows[2]
         });
     });
 });
@@ -256,7 +266,7 @@ db.query(query2,function(error, results){
 
     });
 
-    return res.redirect('/login');
+    res.redirect('/submit_success');
 });
 
 app.post('/sign_up_c', function(req,res){
@@ -300,7 +310,7 @@ db.query(query2,function(error, results){
 
     });
 
-    return res.redirect('/login');
+    res.redirect('/submit_success');
 });
 
 app.get('/team',function(req,res){
