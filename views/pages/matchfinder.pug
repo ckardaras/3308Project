@@ -22,10 +22,10 @@ br
               br
               // Bootstrap
               .form-group
-                label(for='usr') Enter Location:
-                input#usr.form-control(type='text')
+                label(for='loc') Enter Location:
+                input#loc.form-control(type='text')
               // <button type="button" class="btn btn-primary">Submit</button>
-              input.btn.btn-info(type='submit' value='Submit Button')
+              input.btn.btn-info(type='submit' value='Submit Button' onclick="AddDateLocation()")
               .col-auto
                 // <button type="button" class="btn btn-primary">Primary</button>
   .col
@@ -68,4 +68,4 @@ br
               span.text-xs  -
               span.text-xs(name='Location') Greeley
             .col-auto
-              button.btn.btn-primary(type='button') Invite
+              button#my_submit_button.btn.btn-primary(type='button') Invite
