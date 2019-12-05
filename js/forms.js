@@ -45,3 +45,9 @@ function pickedTeam(i)
 {
 	document.getElementById("selectTeamButton").innerText = teams[i];
 }
+
+function setImg()
+{
+	console.log("../img/" + document.getElementById("input_img").value.split("\\").pop());
+	document.getElementById("playerimage").src = "../img/" + document.getElementById("input_img").value.split("\\").pop();
+}
