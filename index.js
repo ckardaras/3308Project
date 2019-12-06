@@ -415,7 +415,7 @@ app.get('/matchfinder', function(req, res) {
             console.log('In');
             console.log(rows[1]);
             res.render('pages/matchfinder.pug',{
-                //css:'../css/teampage.css',
+                css:'../css/teampage.css',
                 data1:rows[0],
                 data2:rows[1],
                 data3:rows[2],
