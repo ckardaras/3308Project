@@ -12,7 +12,6 @@ main.page.testimonials
         -i++;
       .row
         .col
-          button.btn.btn-primary(type='button') +
       br
       if(data3)
       -var count=0
@@ -24,9 +23,6 @@ main.page.testimonials
           .col-lg-4
             .card.border-2.border-primary
                 .card-body
-                  .btn-group.pull-right
-                    button.btn
-                      i.fa.fa-trash
                 -var source=""
                 -source=item.ProfilePicLink
                   img.rounded.mx-auto(src=source)

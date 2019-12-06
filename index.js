@@ -402,7 +402,7 @@ app.get('/matchfinder', function(req, res) {
     query3="Select UserGroup_Id from User where username in('";
     query3+=req.session.name;
     query3+= "');"//is the user a coach?
-    
+
     query4="Select p.name, p.email, u.Team_Id from Profile p inner join User u on u.User_Id=p.User_id Where UserGroup_Id=1;";
 
     query6="Select Team_id"
