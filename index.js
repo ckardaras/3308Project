@@ -405,6 +405,8 @@ app.get('/matchfinder', function(req, res) {
     
     query4="Select p.name, p.email, u.Team_Id from Profile p inner join User u on u.User_Id=p.User_id Where UserGroup_Id=1;";
 
+    query6="Select Team_id"
+
     db.query(query1+query2+query3+query4, function(err, rows, fields) {
         if(!err)
         {
@@ -425,6 +427,53 @@ app.get('/matchfinder', function(req, res) {
             console.log('encountered error');
         });
     });
+
+//Add Match to Board
+app.post('/post_game', function(req,res){
+    var arena=req.body.location;
+    var d = req.body.date
+    var t = req.body.time
+
+    var query1="Insert Into Matches(GDate, GTime, Arena) Values('";
+    query1+=d;
+    query1+="','"+t+"'";
+    query1+=",'"+arena+"');";
+    var query2="SET FOREIGN_KEY_CHECKS=0;";
+    var query3="INSERT INTO TeamMatch_Bridge(Match_Id, Team_Id) Values(" + Match_Id + "," + 0 + ");";
+
+    var query4="Update TeamMatch_Bridge SET Team_Id=(Select Team_Id from User Where username = '";
+    query4+=req.session.name;
+    query4+="')";
+    query4+="Where Team_Id = 0;"
+
+    console.log(query1);
+
+
+    db.query(query1,function(error, results){
+        if (error) throw error;
+        console.log("Post Being Added");
+
+    });
+
+    db.query(query2,function(error, results){
+        if (error) throw error;
+        console.log("Foreign Key Checks Lifted");
+    });
+
+    db.query(query3,function(error, results){
+        if (error) throw error;
+        console.log("Post Entered");
+    });
+
+    db.query(query4,function(error, results){
+        if (error) throw error;
+        console.log("Post Successful");
+    });
+
+
+
+    res.redirect('/matchfinder')
+});
 
 
 app.listen(port, ()=> {
