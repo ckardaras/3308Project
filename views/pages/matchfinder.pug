@@ -16,55 +16,67 @@ br
             .col.mr-2
               // html
               form
-                | Pick a date and time:
-                input#datetime_(type='datetime-local' name='datetime')
-              br
+                Label="Pick a Date: " 
+                input#date(type='date', name='date')
+                br
+                Label="Pick Time (Hour/Minute/AM or PM): "
+                input#time(type="time", name="time")
+                br
               // Bootstrap
               .form-group
                 label(for='loc') Enter Location:
                 input#loc.form-control(type='text')
               // <button type="button" class="btn btn-primary">Submit</button>
-              input.btn.btn-info(type='submit' value='Submit Button' onclick='AddDateLocation()')
+              for item in data3
+                if(item.UserGroup_Id==1)
+                  input.btn.btn-info(type='submit' value='Submit Post' onclick='AddDateLocation()')
+                else
+                  input.btn.btn-secondary(type='submit' value='Only Coach Can Post' onclick='AddDateLocation()' disabled)
+
               .col-auto
                 // <button type="button" class="btn btn-primary">Primary</button>
+    .card.shadow.mb-4
+      .card-header.py-3
+        h6.text-primary.font-weight-bold.m-0 Your Team's Posts
+      ul#Thicklist.list-group.list-group-flush
+        if(data2)
+          for item in data2
+            li.list-group-item
+              .row.align-items-center.no-gutters
+                .col.mr-2
+                  h6.mb-0(name='teamname')
+                    strong=item.TeamName
+                  span.text-xs(name='time')=item.GTime
+                  -var date = new Date(item.GDate);
+                  -var mydate=" " +(date.getMonth()+1) +'/' + date.getDate() + '/'+date.getFullYear();
+                  span.text-xs(name='date')=mydate
+                  span.text-xs(name='Location')=" At " + item.Arena
+                .col-auto
+
   .col
     .card.shadow.mb-4
       .card-header.py-3
-        h6.text-primary.font-weight-bold.m-0 Matches Board
+        h6.text-primary.font-weight-bold.m-0 Other Team's Posts
       ul#Thicklist.list-group.list-group-flush
-        li.list-group-item
-          .row.align-items-center.no-gutters
-            .col.mr-2
-              h6.mb-0(name='teamname')
-                strong Gamer
-              span.text-xs(name='time') 10:30 AM
-              span.text-xs  -
-              span.text-xs(name='date') 10/12/19
-              span.text-xs  -
-              span.text-xs(name='Location') Boulder
-            .col-auto
-              button.btn.btn-primary(type='button') Invite
-        li.list-group-item
-          .row.align-items-center.no-gutters
-            .col.mr-2
-              h6.mb-0
-                strong Zelda
-              span.text-xs(name='time') 10:30 AM
-              span.text-xs  -
-              span.text-xs(name='date') 10/12/19
-              span.text-xs  -
-              span.text-xs(name='Location') Denver
-            .col-auto
-              button.btn.btn-primary(type='button') Invite
-        li#thirdelement.list-group-item
-          .row.align-items-center.no-gutters
-            .col.mr-2
-              h6.mb-0
-                strong Pokemon
-              span.text-xs(name='time') 10:30 AM
-              span.text-xs  -
-              span.text-xs(name='date') 10/12/19
-              span.text-xs  -
-              span.text-xs(name='Location') Greeley
-            .col-auto
-              button#my_submit_button.btn.btn-primary(type='button') Invite
+        if(data1)
+          for item in data1
+            li.list-group-item
+              .row.align-items-center.no-gutters
+                .col.mr-2
+                  h6.mb-0(name='teamname')
+                    strong=item.TeamName
+                  span.text-xs(name='time')=item.GTime
+                  -var date = new Date(item.GDate);
+                  -var mydate=" " +(date.getMonth()+1) +'/' + date.getDate() + '/'+date.getFullYear();
+                  span.text-xs(name='date')=mydate
+                  span.text-xs(name='Location')=" At " + item.Arena
+                .col-auto
+                  for val in data3
+                    if(val.UserGroup_Id==1)
+                      for coaches in data4
+                        if(coaches.Team_Id==item.Team_Id)
+                          -var mail="mailto:"+coaches.email+"?Subject=Contacting%20Coach%20"+coaches.name;
+                          a(href=mail)
+                            input.btn.btn-info(type='submit' value='Contact' onclick='AddDateLocation()')
+                    else
+                      input.btn.btn-secondary(type='submit' value='Only Coach Can Contact' disabled)

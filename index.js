@@ -24,7 +24,10 @@ const db = mysql.createConnection({
     multipleStatements:true
 });
 
+//need for coach signup
 var Big=2;
+
+var Match_Id=4;
 
 
 var sql ="DROP DATABASE IF EXISTS League; CREATE DATABASE League;" //Make New Database, drop existing League DB if exists
@@ -41,7 +44,7 @@ sql+="CREATE TABLE IF NOT EXISTS `League`.`User` (`User_Id` INT NOT NULL AUTO_IN
 
 sql+="CREATE TABLE IF NOT EXISTS `League`.`Profile` (`User_Id` INT NOT NULL AUTO_INCREMENT,`email` VARCHAR(100) NULL,`phone` VARCHAR(10) NULL,`ProfilePicLink` VARCHAR(100) NULL, name VARCHAR(100) NULL,PRIMARY KEY (`User_Id`),CONSTRAINT `User_Id`FOREIGN KEY (`User_Id`)REFERENCES `League`.`User` (`User_Id`)ON DELETE NO ACTION ON UPDATE NO ACTION)ENGINE = InnoDB;" //make profile table
 
-sql+="CREATE TABLE IF NOT EXISTS `League`.`Match` (`Match_Id` INT NOT NULL AUTO_INCREMENT,`GameDate` DATE NULL,`Arena` VARCHAR(100) NULL,`Valid` VARCHAR(45) NOT NULL DEFAULT 'False',PRIMARY KEY (`Match_Id`))ENGINE = InnoDB;" //make match table
+sql+="CREATE TABLE IF NOT EXISTS `League`.`Matches` (`Match_Id` INT NOT NULL AUTO_INCREMENT,`GDate` DATE NULL,`Arena` VARCHAR(100) NULL,`GTime` TIME NULL,PRIMARY KEY (`Match_Id`))ENGINE = InnoDB;" //make matches table
 
 sql+="CREATE TABLE IF NOT EXISTS `League`.`TeamMatch_Bridge` (`Match_Id` INT NOT NULL,`Team_Id` INT NOT NULL,`Score` INT NULL,`is_Winner` TINYINT NULL DEFAULT 0,PRIMARY KEY (`Match_Id`, `Team_Id`),INDEX `Team_Id_idx` (`Team_Id` ASC),CONSTRAINT `Match_Id`FOREIGN KEY (`Match_Id`)REFERENCES `League`.`Match` (`Match_Id`)ON DELETE NO ACTION ON UPDATE NO ACTION,CONSTRAINT `Team_Id`FOREIGN KEY (`Team_Id`)REFERENCES `League`.`Team` (`Team_Id`)ON DELETE NO ACTION ON UPDATE NO ACTION)ENGINE = InnoDB;" //Make Table TeamMatch_Bridge
 
@@ -77,6 +80,21 @@ sql+="INSERT INTO Profile(email,phone,ProfilePicLink,name) Values('Test@gmail.co
 
 sql+="INSERT INTO Team Values(1,'Mario Party',1, 'I am Coach Bowser. These Are my Minions');"
 sql+="INSERT INTO Team Values(2,'Another Test Team',1, 'This is another Test Team');"
+
+
+//insert example matches
+sql+="Insert Into Matches(GDate, GTime, Arena) Values('2022-12-20','03:45:00','Pluto');"
+sql+="SET FOREIGN_KEY_CHECKS=0;";
+sql+="INSERT INTO TeamMatch_Bridge(Match_id, Team_id) Values(1,1);";
+
+sql+="Insert Into Matches(GDate, GTime, Arena) Values('2019-12-20','05:30:00','Mars');"
+sql+="SET FOREIGN_KEY_CHECKS=0;";
+sql+="INSERT INTO TeamMatch_Bridge(Match_id, Team_id) Values(2,1);";
+
+
+sql+="Insert Into Matches(GDate, GTime, Arena) Values('2020-01-20','19:20:00','Neptune');"
+sql+="SET FOREIGN_KEY_CHECKS=0;";
+sql+="INSERT INTO TeamMatch_Bridge(Match_id, Team_id) Values(3,2);";
 
 
 
@@ -373,14 +391,40 @@ app.get('/matchfinder', function(req, res) {
     {
         res.redirect('/login')
     }
+    var query1="select * from Matches m inner join TeamMatch_Bridge tmb on tmb.Match_Id=m.Match_id inner join Team t on t.Team_Id=tmb.Team_Id Where tmb.Team_Id NOT IN (Select Team_id from User where username IN('";
+    query1+=req.session.name;
+    query1+="'));";
 
+    var query2="select * from Matches m inner join TeamMatch_Bridge tmb on tmb.Match_Id=m.Match_id inner join Team t on t.Team_Id=tmb.Team_Id Where tmb.Team_Id IN (Select Team_id from User where username IN('";
+    query2+=req.session.name
+    query2+="'));";
 
-    res.render('pages/matchfinder',{
-        // css:'../css/PlayerPage.css',
-        title:"Match Finder"
+    query3="Select UserGroup_Id from User where username in('";
+    query3+=req.session.name;
+    query3+= "');"//is the user a coach?
+    
+    query4="Select p.name, p.email, u.Team_Id from Profile p inner join User u on u.User_Id=p.User_id Where UserGroup_Id=1;";
 
+    db.query(query1+query2+query3+query4, function(err, rows, fields) {
+        if(!err)
+        {
+            console.log('Not In')
+            console.log(rows[0]);
+            console.log('In');
+            console.log(rows[1]);
+            res.render('pages/matchfinder.pug',{
+                //css:'../css/teampage.css',
+                data1:rows[0],
+                data2:rows[1],
+                data3:rows[2],
+                data4:rows[3],
+                title:'Match Page'
+            });
+        }
+        else
+            console.log('encountered error');
         });
-});
+    });
 
 
 app.listen(port, ()=> {
