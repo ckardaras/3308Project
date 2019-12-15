@@ -1,6 +1,6 @@
 # 3308 Project
 
-![Image of Project](img/project.png)
+![Image of Project](img/Project.png)
 
 We are creating a sports management application which can be joined by “coaches” and “team members”, 
 where coaches create teams and team members join the teams. Then matches can be organized 
